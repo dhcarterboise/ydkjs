@@ -1,0 +1,85 @@
+<html>
+<head>
+
+    <script src="http://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+
+<p style="font-size: xx-large">
+    
+    <button id="btn1">Click Me</button> 
+<p id="result"></p>
+
+<h1>THIS</h1>
+</p>
+
+<script>
+
+    $(document).ready(function () {
+
+        /*
+         * Callback and this
+         */
+
+        var user = {
+            id: "The User Object",
+            data:[
+                {name:"J. Sienfeld", age:60},
+                {name:"M. Richards", age:65},
+                {name:"J. Alexander", age:55},
+            ],
+            getRandom () {
+                return ((Math.random () * 3 | 0) + 1) - 1; // random number between 0 and 1
+            },
+            showUser() { 
+                var rn = user.getRandom();
+                console.log("Random Number:  " + rn);
+                console.log("This: " + this.id);
+                console.log(this.data[rn].name + " " + this.data[rn].age);
+            },
+            clickHandler:function (event) {
+                    
+                    var rn = user.getRandom();
+                    console.log("Random Number:  " + rn);
+                    console.log("This: " + this.id);
+                    var value = this.data[rn].name + " " + this.data[rn].age;
+                    console.log(value);
+                    $("#result").html(value);
+            }, 
+            clickHandler2:function (event) {
+
+
+
+
+
+            }
+        }
+
+        user.showUser();
+
+        /*
+         * Callbacks
+         */
+        $("#btn1").click(user.clickHandler); // Get an error (cannot read property of undefined)
+        //$("#btn1").click(user.clickHandler.bind(user)); // the fix
+        
+        /*
+         * Closures
+         */
+
+
+
+
+
+    })
+
+
+</script>
+
+</body>
+
+</html>
